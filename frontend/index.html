@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        window.addEventListener('error', function(e) {
+            alert("JS ERROR: " + e.message + " at " + e.filename + ":" + e.lineno);
+        });
+        window.addEventListener('unhandledrejection', function(e) {
+            alert("Unhandled Promise Rejection: " + e.reason);
+        });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TransitOps — Smart Transport Operations Platform for fleet management, driver coordination, trip tracking, and financial oversight.">
+    <title>TransitOps</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         LOGIN PAGE
+         ============================================================ -->
+    <div id="login-page" class="login-page">
+        <!-- Floating Ambient Background Orbs -->
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+        
+        <!-- Unified Glass Container -->
+        <div class="login-glass-container">
+            <!-- Left Panel (Branding) -->
+            <div class="login-left-panel">
+                <div class="login-left-content">
+                    <!-- Amber mesh icon with gold gradient -->
+                    <div class="login-logo-mesh">
+                        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="2" width="20" height="20" rx="6" stroke="url(#gold-grad)" stroke-width="2.5" stroke-dasharray="3 2"/>
+                            <path d="M6 6H18V18H6V6Z" fill="url(#gold-grad)" fill-opacity="0.25"/>
+                            <defs>
+                                <linearGradient id="gold-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#fbbf24"/>
+                                    <stop offset="100%" stop-color="#b45309"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h1 class="login-title-left">TransitOps</h1>
+                    <p class="login-subtitle-left">Smart Transport Operations Platform</p>
+                    
+                    <div class="login-roles-list">
+                        <p class="roles-list-title">One login, four roles:</p>
+                        <ul>
+                            <li><span class="role-bullet"></span>Fleet Manager</li>
+                            <li><span class="role-bullet"></span>Dispatcher</li>
+                            <li><span class="role-bullet"></span>Safety Officer</li>
+                            <li><span class="role-bullet"></span>Financial Analyst</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="login-left-footer">
+                    TRANSITOPS © 2026 · RBAC ENABLED
+                </div>
+            </div>
+            
+            <!-- Right Panel (Dark Panel) -->
+            <div class="login-right-panel">
+                <!-- Sign-in View -->
+                <div class="login-right-content" id="login-form-container">
+                    <h2 class="login-title-right">Sign in to your account</h2>
+                    <p class="login-subtitle-right">Enter your credentials to continue</p>
+                    
+                    <!-- Form -->
+                    <form id="login-form" autocomplete="off">
+                        <div class="form-group-custom">
+                            <label for="login-username">EMAIL OR USERNAME</label>
+                            <input type="text" id="login-username" placeholder="Raven.k@transitops.in" required>
+                        </div>
+                        <div class="form-group-custom">
+                            <label for="login-password">PASSWORD</label>
+                            <input type="password" id="login-password" placeholder="••••••••" required>
+                        </div>
+                        <div class="form-group-custom">
+                            <label for="login-role">ROLE (RBAC)</label>
+                            <select id="login-role" class="select-custom">
+                                <option value="fleet_manager">Fleet Manager</option>
+                                <option value="driver">Dispatcher</option>
+                                <option value="safety_officer">Safety Officer</option>
+                                <option value="financial_analyst">Financial Analyst</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-actions-custom">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="remember-me" checked>
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="#" class="forgot-pwd-link" id="forgot-pwd-trigger">Forgot password?</a>
+                        </div>
+    
+                        <button type="submit" id="login-btn" class="btn-custom-submit">
+                            Sign In
+                        </button>
+                    </form>
+                    
+                    <!-- Access scoping info -->
+                    <div class="access-scoping-info">
+                        <p class="scoping-title">Access is scoped by role after login:</p>
+                        <ul>
+                            <li><span>•</span> Fleet Manager → Fleet, Maintenance</li>
+                            <li><span>•</span> Dispatcher → Dashboard, Trips</li>
+                            <li><span>•</span> Safety Officer → Drivers, Compliance</li>
+                            <li><span>•</span> Financial Analyst → Fuel & Expenses, Analytics</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <!-- Forgot Password View (Hidden by default) -->
+                <div class="login-right-content hidden" id="forgot-password-container">
+                    <h2 class="login-title-right">Reset your password</h2>
+                    <p class="login-subtitle-right">Enter your email address and we will send you a reset link</p>
+                    
+                    <form id="forgot-form" autocomplete="off">
+                        <div class="form-group-custom">
+                            <label for="forgot-email">EMAIL ADDRESS</label>
+                            <input type="email" id="forgot-email" placeholder="Raven.k@transitops.in" required>
+                        </div>
+                        
+                        <button type="submit" id="forgot-btn" class="btn-custom-submit">
+                            Send Reset Link
+                        </button>
+                        
+                        <div class="form-actions-custom" style="justify-content: center; margin-top: var(--sp-6);">
+                            <a href="#" class="back-to-login-link">Back to Sign In</a>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Forgot Password Success View (Hidden by default) -->
+                <div class="login-right-content hidden" id="forgot-success-container">
+                    <!-- Success icon (check mark circle in green) -->
+                    <div class="success-icon-wrapper">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="#10b981" stroke-width="2"/>
+                            <path d="M8 12L11 15L16 9" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2 class="login-title-right">Check your email</h2>
+                    <p class="login-subtitle-right">We have sent password reset instructions to your email address.</p>
+                    
+                    <div class="form-actions-custom" style="justify-content: center; margin-top: var(--sp-6);">
+                        <a href="#" class="back-to-login-link">Back to Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Error message container (styled to float or sit on the side as in mock) -->
+        <div id="login-error" class="login-error-custom hidden">
+            <div class="error-badge">Error state</div>
+            <div class="error-details">
+                <span class="error-cross" id="login-error-close">✖</span>
+                <span id="login-error-text">Invalid credentials. Account locked after 5 failed attempts.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         APP LAYOUT
+         ============================================================ -->
+    <div id="app-layout" class="app-layout hidden">
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-logo-icon">🚛</span>
+                <span class="sidebar-logo-text">TransitOps</span>
+            </div>
+
+            <nav class="sidebar-nav" id="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="vehicles">
+                    <span class="nav-icon">🚐</span>
+                    <span class="nav-label">Vehicles</span>
+                </a>
+                <a href="#" class="nav-item" data-page="drivers">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-label">Drivers</span>
+                </a>
+                <a href="#" class="nav-item" data-page="trips">
+                    <span class="nav-icon">🗺️</span>
+                    <span class="nav-label">Trips</span>
+                </a>
+                <a href="#" class="nav-item" data-page="maintenance">
+                    <span class="nav-icon">🔧</span>
+                    <span class="nav-label">Maintenance</span>
+                </a>
+                <a href="#" class="nav-item" data-page="fuel">
+                    <span class="nav-icon">⛽</span>
+                    <span class="nav-label">Fuel Logs</span>
+                </a>
+                <a href="#" class="nav-item" data-page="expenses">
+                    <span class="nav-icon">💰</span>
+                    <span class="nav-label">Expenses</span>
+                </a>
+            </nav>
+
+            <!-- User info -->
+            <div class="sidebar-user" id="sidebar-user">
+                <div class="user-avatar" id="user-avatar">A</div>
+                <div class="user-details">
+                    <span class="user-name" id="sidebar-user-name">Admin User</span>
+                    <span class="user-role-badge" id="sidebar-user-role">admin</span>
+                </div>
+            </div>
+
+            <button id="logout-btn" class="btn-logout">
+                <span>⎋</span> Sign Out
+            </button>
+        </aside>
+
+        <!-- Main Area -->
+        <main class="main-area">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button id="sidebar-toggle" class="btn-icon sidebar-toggle">☰</button>
+                    <h1 id="page-title" class="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="header-user">
+                        <div class="header-avatar" id="header-avatar">A</div>
+                        <span class="header-role-badge" id="header-user-role">admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div id="main-content" class="main-content">
+                <!-- Dynamic page content rendered here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================================
+         MODAL OVERLAY
+         ============================================================ -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-title" class="modal-title">Modal Title</h3>
+                <button id="modal-close-btn" class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Dynamic form content -->
+            </div>
+            <div class="modal-footer">
+                <button id="modal-cancel-btn" class="btn btn-outline">Cancel</button>
+                <button id="modal-save-btn" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         TOAST CONTAINER
+         ============================================================ -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ============================================================
+         SCRIPTS
+         ============================================================ -->
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+    <script src="/static/js/vehicles.js"></script>
+    <script src="/static/js/drivers.js"></script>
+    <script src="/static/js/trips.js"></script>
+    <script src="/static/js/maintenance.js"></script>
+    <script src="/static/js/fuel.js"></script>
+    <script src="/static/js/expenses.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
